@@ -1,0 +1,57 @@
+/* body.settings_page_theme-admin */
+#theme-options-wrap {
+  width: 100%;
+  max-width: 900px;
+  padding: 3em;
+}
+
+#theme-options-wrap h2 {
+  margin-bottom:2em;
+}
+
+#theme-options-wrap #icon-tools {
+  position: relative;
+  top: -10px;
+}
+
+#theme-options-wrap input[type="checkbox"] {
+  float:left;
+  margin:0 6px 0 -20px;
+}
+
+#theme-options-wrap .form-table th {
+	padding-left: 1em;
+}
+
+#theme-options-wrap p input {
+  border-color:#666;
+}
+
+#theme-options-wrap table.form-table tr:nth-child(odd){
+	background:#fff;
+}
+
+#theme-options-wrap table.form-table td {
+	padding:16px 10px 16px 20px;
+}
+
+#theme-options-wrap table.form-table p {
+	margin:0 0 1px;
+	color:#444;
+}
+
+#theme-options-wrap code {
+	display:block;
+	font-weight: normal;
+	background:#000;
+	color:lime;
+}
+
+#theme-options-wrap p code {
+	display:inline;
+}
+
+#theme-options-wrap p {
+	font-size: 0.9em;
+	line-height: 1.7em;
+}
