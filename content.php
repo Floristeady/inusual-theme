@@ -15,7 +15,7 @@
 
 
 	<header class="entry-header">
-		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && inusual_categorized_blog() ) : ?>
+		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) )) : ?>
 		<div class="entry-meta">
 			<span class="cat-links"><?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'inusual' ) ); ?></span>
 		</div>

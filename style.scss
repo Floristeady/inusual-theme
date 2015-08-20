@@ -1,0 +1,28 @@
+/*
+	Theme Name: Inusual Theme
+	Theme URI: https://github.com/floristeady/inusual
+	Description: inusual Theme for inusual Estudio & Colaboración
+	Author: Florencia Rosenfeld
+	Author URI: http://www.floristeady.com
+	Version: 1.0
+	License: GNU General Public License v2 or later
+    License URI: http://www.gnu.org/licenses/gpl-2.0.html
+	Tags: html5, boilerplate, responsive web design, foundation, media queries, one menu, admin panel.
+*/
+
+/* ==========================================================================
+/* Table of Contents
+==============================================================================
+
+	0. Variables & Typography
+	1. Global Styles & Basic Structure
+	3. Navigation & Links
+	4. Pages Content 
+	
+*/
+
+// Here we import our partials
+@import "sass/variablesandtypos";
+@import "sass/globalandbasic";
+@import "sass/navandlinks";
+@import "sass/pagescontent";

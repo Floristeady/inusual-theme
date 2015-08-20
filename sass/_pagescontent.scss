@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Pages Content 
+   ========================================================================== */
+   
+// pagina inicio
+#wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+} 
+
+#content {
+	height: 100%;
+} 
+
+#container {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 100;
+    top:0;
+}
+
+#main {
+	position: absolute;
+	top:0;
+	margin: 130px auto 0;
+	max-width: 90%;
+	left: 0;
+	right: 0;
+	text-align: center;
+	
+	&::before {
+		content: '';
+		//background: url(images/assets/border.png) no-repeat;
+		width: 1024px;
+		height: 529px;
+		display: block;
+	}
+	
+}
+
+.img {
+	position: absolute;
+	top: 0;
+	max-width: 100%;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.entry-img {
+	position: absolute;
+	top:20%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+
+.fullscreen-cover {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+}
+
+.cover {
+	background-image: url(images/assets/cover01.jpg);
+	background-blend-mode: multiply;
+	background-position: top center;
+    transform-origin: 50% 80%;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}

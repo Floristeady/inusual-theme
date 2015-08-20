@@ -35,7 +35,7 @@
 	</head>
 	<body <?php body_class(); ?>>
 				
-		<header id="header" role="banner">
+		<header id="header" role="banner" class="hide">
 
 			<div class="header-main">
 				
@@ -61,5 +61,5 @@
 
 		</header>
 
-		<section id="main" role="main">
+		<section id="wrapper" role="main">
 			

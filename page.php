@@ -1,6 +1,5 @@
 <?php
 /**
- * Template Name: P&aacute;gina principal
  * @package WordPress
  * @subpackage inusual
  * @since inusual 1.0

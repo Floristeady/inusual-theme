@@ -226,7 +226,7 @@ function inusual_scripts() {
 	wp_enqueue_style( 'inusual-font', inusual_font_url(), array(), null );
 	
 	// Add Genericons font, used in the main stylesheet.
-	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/css/foundation.min.css', array(), '5.5.1' );
+	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation.min.css', array(), '5.5.1' );
 
 	// Load our main stylesheet.
 	wp_enqueue_style( 'inusual-style', get_stylesheet_uri());
