@@ -21,7 +21,7 @@
 	//	Add option if in Admin Page
 	if ( ! function_exists( 'create_theme_admin_page' ) ):
 		function create_theme_admin_page() {
-			add_theme_page( __('General Options', 'inusual'), __( 'General Options', 'inusual'), 'administrator', 'theme-admin', 'build_theme_admin_page');
+			add_theme_page( __('General Options', 'allcampers'), __( 'General Options', 'allcampers'), 'administrator', 'theme-admin', 'build_theme_admin_page');
 		}
 		add_action('admin_menu', 'create_theme_admin_page');
 	endif; // create_theme_admin_page
@@ -32,8 +32,8 @@
 		?>
 			<div id="theme-options-wrap">
 				<div class="icon32" id="icon-tools"><br /></div>
-				<h2><?php _e( 'General options for', 'inusual' ); ?> <?php echo wp_get_theme() . __( '', 'inusual' );?> </h2>
-				<p><?php _e( 'This is the web site manager. Select the options you want to include on the website.', 'inusual' ); ?></p>
+				<h2><?php _e( 'General options for', 'allcampers' ); ?> <?php echo wp_get_theme() . __( '', 'allcampers' );?> </h2>
+				<p><?php _e( 'This is the web site manager. Select the options you want to include on the website.', 'allcampers' ); ?></p>
 
 				<form method="post" action="options.php" enctype="multipart/form-data">
 					<?php settings_fields('plugin_options'); /* very last function on this page... */ ?>
@@ -59,14 +59,18 @@
 		function register_and_build_fields() {
 			register_setting('plugin_options', 'plugin_options', 'validate_setting');
 			add_settings_section('main_section', '', 'section_cb', 'theme-admin');
-			add_settings_field('google_verification', 'Google Verification?:', 'google_verification_setting', 'theme-admin', 'main_section');
+			//logo
+			add_settings_field('logo_theme', 'Add Logotype:', 'logotype_setting', 'theme-admin', 'main_section');
+			add_settings_field('google_verification', 'Google Analytics ID:', 'google_verification_setting', 'theme-admin', 'main_section');
+			
+			
 			add_settings_field('meta_tags', 'Meta Keywords tags?:', 'meta_tags_setting', 'theme-admin', 'main_section');
 	
 			add_settings_field('favicon', 'Got Favicon?:', 'favicon_setting', 'theme-admin', 'main_section');
 			add_settings_field('favicon_ithing', 'Got <em><abbr title="iPhone, iTouch, iPad...">iThing</abbr></em> Favicon?', 'favicon_ithing_setting', 'theme-admin', 'main_section');
 			add_settings_field('modernizr_js', 'Modernizr JS?:', 'modernizr_js_setting', 'theme-admin', 'main_section');
 			add_settings_field('jquery_js', 'jQuery JS?:', 'jquery_js_setting', 'theme-admin', 'main_section');
-			add_settings_field('plugins_js', 'jQuery Plug-ins JS?:', 'plugins_js_setting', 'theme-admin', 'main_section');
+			add_settings_field('plugins_js', 'jQuery plug-ins JS:', 'plugins_js_setting', 'theme-admin', 'main_section');
 			add_settings_field('site_js', 'Site-specific JS?:', 'site_js_setting', 'theme-admin', 'main_section');
 			add_settings_field('cache_buster', 'Cache-Buster?:', 'cache_buster_setting', 'theme-admin', 'main_section');
 			
@@ -111,7 +115,21 @@
 	if ( ! function_exists( 'section_cb' ) ):
 		function section_cb() {}
 	endif; // section_cb
-
+	
+	//	logotype
+	if ( ! function_exists( 'logotype_setting' ) ):
+		function logotype_setting() {
+			$options = get_option('plugin_options');
+			$checked = (isset($options['logo_theme']) && $options['logo_theme'] && $options['logo_theme_url'] && $options['logo_theme_url'] !== '') ? 'checked="checked" ' : '';
+			$logo = (isset($options['logo_theme_url']) && $options['logo_theme_url']) ? $options['logo_theme_url'] : '';
+			
+			echo '<input class="check-field" type="checkbox" name="plugin_options[logo_theme]" value="true" ' .$checked. '/>';
+			
+			echo '<p><a href="'. home_url() .'/wp-admin/media-new.php" target="_blank"><em>Upload your own logo image</em></a> using the WordPress Media Library and insert the URL here:</p>';
+			echo '<input type="text" size="80" name="plugin_options[logo_theme_url]" value="'.$logo.'" onfocus="javascript:if(this.value===\'\'){this.select();}">';
+			echo '<img style="margin-top: 10px;" src="'. (($logo!=='') ? $logo :  get_template_directory_uri() .'/images/logo.png').'">';
+		}
+	endif; // logotype
 
 	//	callback fn for google_verification
 	if ( ! function_exists( 'google_verification_setting' ) ):
@@ -119,17 +137,21 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['google_verification']) && $options['google_verification'] && $options['google_verification_account'] && $options['google_verification_account'] !== 'XXXXXXXXX...') ? 'checked="checked" ' : '';
 			$account = (isset($options['google_verification_account']) && $options['google_verification_account']) ? $options['google_verification_account'] : 'XXXXXXXXX...';
+
 			$msg = ($account === 'XXXXXXXXX...') ? ', where </code>XXXXXXXXX...</code> will be replaced with the code you insert above' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[google_verification]" value="true" ' .$checked. '/>';
-			echo _e( '<p>Add <a href="http://www.google.com/support/webmasters/bin/answer.py?answer=35179">Google Verification</a> code and <a href="https://www.google.com/analytics">Google Analytics</a> to the <code>&lt;head&gt;</code> of all your pages.</p>', 'inusual' );
-			echo _e( '<p>To include Google Verificaton and Google Analytics, select this option and include your Verificaton number here:</p><br />', 'inusual' );
-			echo '<input type="text" size="40" name="plugin_options[google_verification_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXXXXXX...\'){this.select();}"></p>';
-			echo _e( '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages, where <code>XXXXXXXXX?</code> will be replaced with the code you insert above</p>', 'inusual' );
+			echo _e( '<p>Add <a href="https://support.google.com/webmasters/answer/35179">Google Verification</a> code and <a href="https://www.google.com/analytics">Google Universal Analytics </a> code to the <code>&lt;head&gt;</code> of all your pages.</p>', 'allcampers' );
+			echo _e( '<p>To include Google Analytics and Google Verification code, select this option and add your Verification number here and the site domain. Google Analytics ID:</p>', 'allcampers' );
+			echo '<input type="text" size="20" name="plugin_options[google_verification_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXXXXXX...\'){this.select();}"></p>';
+			
+			echo _e( '<p>This will add the following code to the <code>&lt;head&gt;</code> of your pages, where <code>XXXXXXXXX?</code> will be replaced with the code you insert above.</p><br/>', 'allcampers' );
+			
 			echo '<code>&lt;meta name="google-site-verification" content="'.$account.'"&gt;</code>';
-			echo _e( '<p>And will add the latest version of the Analytics tracking code, to track website visitors with Google Analytics.</p>', 'inusual' );
+			echo _e( '<p>And will add the latest version of the Analytics tracking code, to track website visitors with Google Analytics.</p>', 'allcampers' );
 		}
 	endif; // google_verification_setting
 
+	
 
 	//	callback fn for favicon
 	if ( ! function_exists( 'favicon_setting' ) ):
@@ -137,9 +159,9 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['favicon']) && $options['favicon']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[favicon]" value="true" ' .$checked. '/>';
-			echo _e( '<p>If you plan to use a <a href="http://en.wikipedia.org/wiki/Favicon">favicon</a> for your site, place the "favicon.ico" file in the root directory of your site.</p>', 'inusual' );
-			echo _e( '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>', 'inusual' );
-			echo _e( '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>', 'inusual' );
+			echo _e( '<p>If you plan to use a <a href="http://en.wikipedia.org/wiki/Favicon">favicon</a> for your site, place the "favicon.ico" file in the root directory of your site.</p>', 'allcampers' );
+			echo _e( '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>', 'allcampers' );
+			echo _e( '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>', 'allcampers' );
 			echo '<code>&lt;link rel="shortcut icon" href="/favicon.ico"&gt;</code>';
 		}
 	endif; // favicon_setting
@@ -150,9 +172,9 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['favicon_ithing']) && $options['favicon_ithing']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[favicon_ithing]" value="true" ' .$checked. '/>';
-			echo _e( '<p>To allow <em>iThing(iPhone, iTouch, iPad...)</em> users to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">add an icon for your site to their Home screen</a>, place the "apple-touch-icon.png" file in the root directory of your site.</p>', 'inusual' );
-			echo _e( '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>', 'inusual' );
-			echo _e( '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>', 'inusual' );
+			echo _e( '<p>To allow <em>iThing(iPhone, iTouch, iPad...)</em> users to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">add an icon for your site to their Home screen</a>, place the "apple-touch-icon.png" file in the root directory of your site.</p>', 'allcampers' );
+			echo _e( '<p>If the file is in the right location, you don\'t really need to select this option, browsers will automatically look there and no additional code will be added to your pages.</p>', 'allcampers' );
+			echo _e( '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>', 'allcampers' );
 			echo '<code>&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;</code>';
 			echo '<code>&lt;link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"&gt;</code>';
 			echo '<code>&lt;link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"&gt;</code>';
@@ -166,8 +188,8 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['modernizr_js']) && $options['modernizr_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[modernizr_js]" value="true" ' .$checked. '/>';
-			echo _e('<p><a href="http://modernizr.com">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>', 'inusual' );
-			echo _e('<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy and paste the new version into the file below, and your site is ready to go!):</p>', 'inusual' );
+			echo _e('<p><a href="http://modernizr.com">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>', 'allcampers' );
+			echo _e('<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy and paste the new version into the file below, and your site is ready to go!):</p>', 'allcampers' );
 			echo '<code>&lt;script src="' .BP_THEME_URL. '/js/modernizr.js"&gt;&lt;/script&gt;</code>';
 		
 		}
@@ -181,14 +203,14 @@
 			$version = (isset($options['jquery_version']) && $options['jquery_version'] && $options['jquery_version'] !== '') ? $options['jquery_version'] : '1.10.2';
 			$inhead = (isset($options['jquery_head']) && $options['jquery_head']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[jquery_js]" value="true" ' .$checked. '/>';
-			echo _e('<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>', 'inusual' );
-			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'inusual' );
+			echo _e('<p><a href="http://jquery.com/">jQuery</a> is a JS library that aids greatly in developing high-quality JavaScript quickly and efficiently.</p>', 'allcampers' );
+			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'allcampers' );
 			echo '<code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js">&lt;/script&gt;</code>';
 			echo '<code>&lt;script&gt;window.jQuery || document.write("&lt;script src="js/jquery-1.10.2.min.js"&lt;/script&gt;")</code>';
 			echo '<p><input class="check-field" type="checkbox" name="plugin_options[jquery_head]" value="true" ' .$inhead. '/>';
-			echo _e('<p><strong>Note: <a href="http://developer.yahoo.com/blogs/ydn/posts/2007/07/high_performanc_5/">Best-practices</a> recommend that you load JS as close to the <code>&lt;/body&gt;</code> as possible.  If for some reason you would prefer jQuery and jQuery plug-ins to be in the <code>&lt;head&gt;</code>, please select this option.</strong></p>', 'inusual' );
-			echo _e('<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).  If this is not successful, it uses the theme\'s version.</p>', 'inusual' );
-			echo _e('<p><strong>Note: This plug-in tries to keep current with the most recent version of jQuery.  If for some reason you would prefer to use another version, please indicate that version:</strong></p><br/>', 'inusual' );
+			echo _e('<p><strong>Note: <a href="http://developer.yahoo.com/blogs/ydn/posts/2007/07/high_performanc_5/">Best-practices</a> recommend that you load JS as close to the <code>&lt;/body&gt;</code> as possible.  If for some reason you would prefer jQuery and jQuery plug-ins to be in the <code>&lt;head&gt;</code>, please select this option.</strong></p>', 'allcampers' );
+			echo _e('<p>The above code first tries to download jQuery from Google\'s CDN (which might be available via the user\'s browser cache).  If this is not successful, it uses the theme\'s version.</p>', 'allcampers' );
+			echo _e('<p><strong>Note: This plug-in tries to keep current with the most recent version of jQuery.  If for some reason you would prefer to use another version, please indicate that version:</strong></p><br/>', 'allcampers' );
 			echo '<input type="text" size="6" name="plugin_options[jquery_version]" value="'.$version.'"> (<a href="http://code.google.com/apis/libraries/devguide.html#jquery">see all versions available via Google\'s CDN</a>)</p>';
 		}
 	endif; // jquery_js_setting
@@ -199,10 +221,10 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['plugins_js']) && $options['plugins_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[plugins_js]" value="true" ' .$checked. '/>';
-			echo _e('<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>', 'inusual' );
-			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'inusual' );
+			echo _e('<p>If you choose to use any <a href="http://plugins.jquery.com/">jQuery plug-ins</a>, I recommend downloading and concatenating them together in a single JS file, as below.  This will <a href="http://developer.yahoo.com/performance/rules.html">reduce your site\'s HTTP Requests</a>, making your site a better experience.</p>', 'allcampers' );
+			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'allcampers' );
 			echo '<code>&lt;script type=\'text/javascript\' src=\'' .BP_THEME_URL. '/js/plug-in.js?ver=x\'&gt;&lt;/script&gt;</code>';
-			echo _e('<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>', 'inusual' );
+			echo _e('<p><strong>Note: If you do <em>not</em> include jQuery, this file will <em>not</em> be added to the page.</strong></p>', 'allcampers' );
 		}
 	endif; // plugins_js_setting
 
@@ -212,10 +234,10 @@
 			$options = get_option('plugin_options');
 			$checked = (isset($options['site_js']) && $options['site_js']) ? 'checked="checked" ' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[site_js]" value="true" ' .$checked. '/>';
-			echo _e( '<p>If you would like to add your own site JavaScript file, we provides a starter file located in:</p>', 'inusual' );
+			echo _e( '<p>If you would like to add your own site JavaScript file, we provides a starter file located in:</p>', 'allcampers' );
 			echo '<code>' .BP_THEME_URL. '/js/script-starter.js</code>';
-			echo _e( '<p>Add what you want to that file and select this option.</p>', 'inusual' );
-			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'inusual' );
+			echo _e( '<p>Add what you want to that file and select this option.</p>', 'allcampers' );
+			echo  _e( '<p>Selecting this option will add the following code to your pages just before the: <code>&lt;/body&gt;</code></p>', 'allcampers' );
 			echo '<code>&lt;script type=\'text/javascript\' src=\'' .BP_THEME_URL. '/js/script-starter.js?ver=x\'&gt;&lt;/script&gt;</code>';
 		}
 	endif; // site_js_setting
@@ -227,10 +249,10 @@
 			$checked = (isset($options['cache_buster']) && $options['cache_buster']) ? 'checked="checked" ' : '';
 			$version = (isset($options['cache_buster_version']) && $options['cache_buster_version']) ? $options['cache_buster_version'] : '1';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[cache_buster]" value="true" ' .$checked. '/>';
-			echo _e( '<p>To force browsers to fetch a new version of a file, versus one it might already have cached, you can add a "cache buster" to the end of your CSS and JS files.</p>', 'inusual' );
-			echo _e( '<p>To increment the cache buster version number, type something here:</p><br />', 'inusual' );
+			echo _e( '<p>To force browsers to fetch a new version of a file, versus one it might already have cached, you can add a "cache buster" to the end of your CSS and JS files.</p>', 'allcampers' );
+			echo _e( '<p>To increment the cache buster version number, type something here:</p><br />', 'allcampers' );
 			echo '<input type="text" size="4" name="plugin_options[cache_buster_version]" value="'.$version.'"></p>';
-			echo _e( '<p>Selecting this option will add the following code to the end of all of your CSS and JS file names on all of your pages:</p>', 'inusual' );
+			echo _e( '<p>Selecting this option will add the following code to the end of all of your CSS and JS file names on all of your pages:</p>', 'allcampers' );
 			echo '<code>?ver='.$version.'</code>';
 		}
 	endif; // cache_buster_setting
@@ -243,9 +265,9 @@
 			$tags = (isset($options['meta_tags_keys']) && $options['meta_tags_keys']) ? $options['meta_tags_keys'] : 'tags...';
 			$msg = ($tags === 'tags...') ? ', where </code>tags...</code> will be replaced with the code you insert above.' : '';
 			echo '<input class="check-field" type="checkbox" name="plugin_options[meta_tags]" value="true" ' .$checked. '/>';
-			echo _e( '<p>Add meta keywords tags for SEO, write your keywords separated by a comma, but not a space.</p>', 'inusual' );
+			echo _e( '<p>Add meta keywords tags for SEO, write your keywords separated by a comma, but not a space.</p>', 'allcampers' );
 			echo '<input type="text" size="80" name="plugin_options[meta_tags_keys]" value="'.$tags.'" onfocus="javascript:if(this.value===\'tags...\'){this.select();}"></p>';
-			echo _e('<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages, where </code>tags...</code> will be replaced with the code you insert above</p>', 'inusual' );
+			echo _e('<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages, where </code>tags...</code> will be replaced with the code you insert above</p>', 'allcampers' );
 			echo '<code>&lt;meta name="keywords" content="'.$tags.'"&gt;</code>';
 		}
 	endif; // google_verification_setting
@@ -254,25 +276,34 @@
 
 /*	4)	Create functions to add above elements to pages */
 
+    //logo
+	if ( ! function_exists( 'add_logo' ) ):
+		function add_logo() {
+			global $logo, $options;
+			$options = get_option('plugin_options');
+			$logo = $options['logo_theme_url'];
+		}
+    endif; // logo
+
 	//	$options['google_verification']
 	if ( ! function_exists( 'add_google_verification' ) ):
 		function add_google_verification() {
 			$options = get_option('plugin_options');
 			$account = $options['google_verification_account'];
 			echo '<meta name="google-site-verification" content="'.$account.'">'.PHP_EOL;
-			echo '<script type="text/javascript">
-					var _gaq = _gaq || [];
-				  _gaq.push(["_setAccount", "'.$account.'"]);
-				  _gaq.push(["_trackPageview"]);
-				
-				  (function() {
-				    var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
-				    ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
-				    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-				  </script>'.PHP_EOL;
+				  
+			echo '<script>
+			(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+			ga("create", "'.$account.'", "auto");
+			ga("require", "displayfeatures");
+			ga("send", "pageview");
+			</script>'.PHP_EOL;
 		}
 	endif; // add_google_verification
+
 
 	//	$options['favicon']
 	if ( ! function_exists( 'add_favicon' ) ):
@@ -345,6 +376,8 @@
 			echo '<meta name="keywords" content="'.$tags.'">'.PHP_EOL;
 		}
     endif; // cache_buster
+    
+   
 
 
 /*	5)	Add theme options to page as requested */
@@ -352,8 +385,11 @@
 
 			// get the options
 			$options = get_option('plugin_options');
-
-			// check if each option is set (meaning it exists) and check if it is true (meaning it was checked)
+			// check if each option is set (meaning it exists) and check if it is true 
+			
+			if (isset($options['google_verification']) && $options['google_verification'] && $options['google_verification_account'] && $options['google_verification_account'] !== 'XXXXXXXXX...') {
+				add_action('wp_print_styles', 'add_google_verification');
+			}
 			
 			if (isset($options['meta_tags']) && $options['meta_tags'] && $options['meta_tags_keys'] && $options['meta_tags_keys'] !== 'tags...') {
 				add_action('wp_print_styles', 'add_meta_tags');
@@ -377,7 +413,7 @@
 				add_action($hook, 'add_jquery_script');
 			}
 			// for jQuery plug-ins, make sure jQuery was also set
-			if (isset($options['jquery_js']) && $options['jquery_js'] && isset($options['plugins_js']) && $options['plugins_js']) {
+			if (isset($options['plugins_js']) && $options['plugins_js']) {
 				// check if should be loaded in <head> or at end of <body>
 				$hook = (isset($options['jquery_head']) && $options['jquery_head']) ? 'wp_print_styles' : 'wp_footer';
 				add_action($hook, 'add_plugin_script');
@@ -387,9 +423,7 @@
 				add_action('wp_footer', 'add_site_script');
 			}
 			
-			if (isset($options['google_verification']) && $options['google_verification'] && $options['google_verification_account'] && $options['google_verification_account'] !== 'XXXXXXXXX...') {
-				add_action('wp_print_styles', 'add_google_verification');
-			}
+			
 			
 		} // if (!is_admin() )
 

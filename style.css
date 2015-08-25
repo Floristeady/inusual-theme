@@ -32,6 +32,9 @@ p {
     line-height: 1;
     font-size: 1em; }
 
+p, li {
+  font-family: "Maven Pro"; }
+
 .entry-content ul li, .entry-content ol li {
   font-size: 1.1em; }
 
@@ -87,10 +90,11 @@ h2 {
 
 h3 {
   text-transform: uppercase;
-  text-align: center;
-  color: #8E9199;
+  color: #111111;
   margin: 1.7em 0 2em;
-  letter-spacing: .16em; }
+  letter-spacing: .05em;
+  font-size: 1em;
+  font-weight: bold; }
 
 .entry-content h4 {
   font-size: 1.4em;
@@ -124,6 +128,31 @@ img {
 
 textarea {
   resize: vertical; }
+
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute; }
+
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  height: auto;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  text-decoration: none;
+  text-transform: none;
+  width: auto;
+  z-index: 100000;
+  /* Above WP toolbar */ }
 
 /**
  * Repeatable Patterns
@@ -281,6 +310,38 @@ span > object {
   *zoom: 1; }
 
 /* ==========================================================================
+	Header
+   ========================================================================== */
+/* Header */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%; }
+  @media screen and (min-width: 40.063em) {
+    #header {
+      opacity: 1 !important;
+      display: block; } }
+  body #header.no-active {
+    opacity: 0 !important; }
+  #header .menu-header {
+    -webkit-transition: visibility 0.4s 0.2s, margin-top 0.2s;
+    -moz-transition: visibility 0.4s 0.2s, margin-top 0.2s;
+    transition: visibility 0.4s 0.2s, margin-top 0.2s; }
+  #header.down {
+    background: none !important; }
+    #header.down .menu-header, #header.down .textwidget, #header.down #lang_sel_list {
+      visibility: hidden;
+      margin-top: -4em; }
+  #header #site-title h1 {
+    float: left;
+    margin: 0 0.5em 0; }
+
+.admin-bar header {
+  margin-top: 30px; }
+
+/* ==========================================================================
    Navigation & Links
    ========================================================================== */
 a {
@@ -324,11 +385,14 @@ a {
     color: white; }
 
 #access {
-  float: left; }
+  float: right; }
   #access li {
-    display: inline-block; }
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: .9em;
+    letter-spacing: 0.05em; }
   #access a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(162, 162, 162, 0.9);
     padding: 18px 10px;
     display: inline-block;
     line-height: 1; }
@@ -346,8 +410,6 @@ a {
       @media screen and (min-width: 40.063em) {
         #access li.current-menu-item a {
           padding-left: .8em; } }
-  #access li:first-child {
-    margin-left: 0; }
   @media screen and (min-width: 40.063em) {
     #access li {
       display: inline-block; }
@@ -356,55 +418,6 @@ a {
   @media screen and (min-width: 40.063em) and (min-width: 40.063em) {
     #access li:first-child a {
       padding-left: .95em !important; } }
-
-#lang_sel_list {
-  float: right; }
-  .header-widget #lang_sel_list {
-    display: none; }
-    @media screen and (min-width: 40.063em) {
-      .header-widget #lang_sel_list {
-        display: inline-block; } }
-  #lang_sel_list li {
-    display: inline-block; }
-  #lang_sel_list a {
-    color: rgba(255, 255, 255, 0.8);
-    padding: 18px 10px;
-    display: inline-block;
-    line-height: 1; }
-    #lang_sel_list a:hover {
-      color: white; }
-  #lang_sel_list .lang_sel_sel {
-    display: none; }
-  #lang_sel_list a {
-    font-style: italic; }
-
-#footer .menu {
-  margin-top: .8em; }
-  #footer .menu li {
-    display: inline-block; }
-  #footer .menu a {
-    color: rgba(255, 255, 255, 0.8);
-    padding: 18px 10px;
-    display: inline-block;
-    line-height: 1; }
-    #footer .menu a:hover {
-      color: white; }
-  @media screen and (min-width: 40.063em) {
-    #footer .menu {
-      text-align: right; } }
-  #footer .menu a {
-    font-size: .95em;
-    padding-bottom: 0;
-    padding-top: 0; }
-    #footer .menu a:hover {
-      color: #2e7c7a; }
-    @media screen and (min-width: 40.063em) {
-      #footer .menu a {
-        padding: 0 0.4em; } }
-  .home #footer .menu a {
-    color: #C1C2C6; }
-    .home #footer .menu a:hover {
-      color: #8c8e95; }
 
 /* menu mobile */
 #button-mobile {
@@ -659,3 +672,24 @@ a {
   background-size: cover;
   height: 100%;
   width: 100%; }
+
+#services {
+  padding: 4em 0 4em; }
+
+.column ul {
+  margin: 0; }
+
+.column h3 {
+  margin-bottom: 0; }
+
+.col-1 {
+  margin-top: 8em; }
+
+.col-2 {
+  margin-top: 2em; }
+
+.col-3 {
+  margin-top: 7em; }
+
+.col-4 {
+  margin-top: 3em; }

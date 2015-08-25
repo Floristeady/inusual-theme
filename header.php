@@ -35,23 +35,24 @@
 	</head>
 	<body <?php body_class(); ?>>
 				
-		<header id="header" role="banner" class="hide">
+		<header id="header" role="banner" class="">
 
 			<div class="header-main">
 				
-				<?php global $theme_options;
-				$theme_settings = get_option( 'theme_options', $theme_options ); ?>
-			
-				<div id="site-title">
+				<?php global $logo, $options, $logo_settings;
+					$logo_settings = get_option('plugin_options', $options ); 
+					error_reporting(E_ALL ^ E_NOTICE);
+					?>
 				
-				<?php if( $theme_settings['custom_logo'] ) : ?>
-					<h1><a href="<?php echo bloginfo('url'); ?>" class="logo"><img src="<?php echo $theme_settings['custom_logo']; ?>" alt="<?php bloginfo('name'); ?>" /> </a></h1>
-				<?php  else : ?>
-					<h1><a href="<?php echo bloginfo('url'); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php endif; ?>
-			  
-					<h2><?php bloginfo( 'description' ); ?></h2>
-				</div>
+					<div id="site-title" class="">
+						
+						<?php if( $logo_settings['logo_theme_url'] ) : ?>
+						<h1><a href="<?php echo bloginfo('url'); ?>" class="logo"><img src="<?php echo $logo_settings['logo_theme_url']; ?>" alt="<?php bloginfo('name'); ?>" /> </a></h1>
+					<?php  else : ?>
+						<h1><a href="<?php echo bloginfo('url'); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
+						<?php endif; ?>
+	
+					</div>
 				
 				<nav id="access" role="navigation" class="clearfix">
 					<a class="screen-reader-text skip-link" href="#content"><?php _e( 'Skip to content', 'inusual' ); ?></a>

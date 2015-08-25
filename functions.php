@@ -31,7 +31,7 @@ function inusual_setup() {
 	add_editor_style( array( 'css/editor-style.css', inusual_font_url() ) );
 	
 	// Create Theme Logotype Options Page
-    require_once ( get_template_directory() . '/theme-admin/theme-options.php' );
+    require_once ( get_template_directory() . '/theme-admin/general-options.php' );
 	
 	// Enable support for Post Thumbnails, and declare two sizes.
 	add_theme_support( 'post-thumbnails' );

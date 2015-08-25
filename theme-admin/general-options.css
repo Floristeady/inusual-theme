@@ -31,12 +31,18 @@
 	background:#fff;
 }
 
+#theme-options-wrap table.form-table tr {
+	padding: 20px 0;
+	float: left;
+	width: 100%;
+}
+
 #theme-options-wrap table.form-table td {
 	padding:16px 10px 16px 20px;
 }
 
 #theme-options-wrap table.form-table p {
-	margin:0 0 1px;
+	margin:0 0 10px;
 	color:#444;
 }
 
@@ -44,7 +50,8 @@
 	display:block;
 	font-weight: normal;
 	background:#000;
-	color:lime;
+	color:rgb(190, 200, 128);
+	padding: 5px 10px 5px;
 }
 
 #theme-options-wrap p code {

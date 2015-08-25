@@ -25,6 +25,31 @@ textarea {
     resize: vertical;
 }
 
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	height: auto;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	text-decoration: none;
+	text-transform: none;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
 
 /**
  * Repeatable Patterns
@@ -210,4 +235,70 @@ span > object {
     *zoom: 1;
 }
 
+/* ==========================================================================
+	Header
+   ========================================================================== */ 
+
+
+/* Header */
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+    
+    @media screen and (min-width: $small-screen) { 
+	    opacity: 1 !important;
+	    display: block;
+	    
+		
+		.home & {
+			@media screen and (min-width: $medium-screen) {  
+				//background: $background-color;
+			}
+			
+			//background: transparentize($background-color, .2);
+		
+			//transition abrir menu movil
+			& {
+				-webkit-transition: opacity .3s .2s;
+				-moz-transition: opacity .3s .2s;
+				transition: opacity .3s .2s;
+		    }
+	    
+	    }
+	}
+
+	body &.no-active {
+		opacity: 0 !important;
+	}
+	
+	//estilos animacion scrolldown
+	& .menu-header {
+		-webkit-transition: visibility .4s .2s, margin-top .2s;
+		-moz-transition: visibility .4s .2s, margin-top .2s;
+		transition: visibility .4s .2s, margin-top .2s;
+	}
+	
+	//estilos scrolldown
+	&.down {
+	    background: none !important;
+	    
+	    .menu-header, .textwidget, #lang_sel_list {
+		    visibility: hidden;
+		    margin-top:-4em;
+	    }
+    }
+    
+    #site-title h1 {
+	    float: left;
+	    margin: 0 .5em 0;
+    }
+	
+}
+
+.admin-bar header {
+	margin-top: 30px;
+}
 
