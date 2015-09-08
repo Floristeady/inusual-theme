@@ -36,7 +36,7 @@ function inusual_setup() {
 	// Enable support for Post Thumbnails, and declare two sizes.
 	add_theme_support( 'post-thumbnails' );
 	//set_post_thumbnail_size( 672, 372, true );
-	//add_image_size( 'inusual-full-width', 1024, 576, true );
+	add_image_size( 'big', 1400, 1200, false );
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
@@ -208,9 +208,8 @@ function inusual_font_url() {
 	 * by Lato, translate this to 'off'. Do not translate into your own language.
 	 */
 	if ( 'off' !== _x( 'on', 'Font: on or off', 'inusual' ) ) {
-		$font_url = add_query_arg( 'family', urlencode( 'Sanchez:400italic,400|Maven+Pro:400,500,700' ), "//fonts.googleapis.com/css" );
+		$font_url = add_query_arg( 'family', urlencode( 'Sanchez:400italic,400|Source+Sans+Pro:400,700' ), "//fonts.googleapis.com/css" );
 	}
-
 	return $font_url;
 }
 
@@ -477,9 +476,56 @@ function my_default_content( $post_content, $post ) {
 }
 add_filter( 'default_content', 'my_default_content', 10, 2 );
 
-// wpml shortcodes --------------------
+
+/**
+********************* FIx menu chrome *****************
+*/
+
+function admin_menu_fix() {
+  echo '<style>
+    #adminmenu { transform: translateZ(0); }
+  </style>';
+}
+add_action('admin_head', 'admin_menu_fix');
+
+/**
+********************* Post Custom Projects *****************
+*/
+
+add_action('init', 'project_register');
  
-add_shortcode( 'wpml_language', 'wpml_find_language');
+function project_register () {
  
+$labels = array(
+'name' => _x('Proyectos', 'post type general name'),
+'singular_name' => _x('Proyecto', 'post type singular name'),
+'add_new' => _x('Añadir Nuevo', 'post type item'),
+'add_new_item' => __('Añadir Nuevo'),
+'edit_item' => __('Editar'),
+'new_item' => __('Nuevo'),
+'view_item' => __('Ver'),
+'search_items' => __('Buscar Proyectos'),
+'parent_item_colon' => ''
+);
+ 
+$args = array(
+'labels' => $labels,
+'show_in_nav_menus' => true,
+'public' => true,
+'has_archive' =>true,
+'publicly_queryable' => true,
+'show_ui' => true,
+'query_var' => true,
+'rewrite' => array('slug' => 'proyectos'),
+'capability_type' => 'page',
+'hierarchical' => false,
+'menu_position' => 5,
+'supports' => array('title','editor')
+);
+ 
+     register_post_type( 'project', $args );
+     flush_rewrite_rules();
+}
+
 
 ?>

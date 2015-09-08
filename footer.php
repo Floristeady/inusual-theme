@@ -23,6 +23,8 @@
 		</div>
 	</footer><!-- footer -->
 	
+	</div><!-- #content -->
+	
 	</section><!-- #main -->
 	
 	<?php wp_footer(); ?>

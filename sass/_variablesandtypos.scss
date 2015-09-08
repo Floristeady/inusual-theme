@@ -19,25 +19,30 @@ $xlarge-screen: 64em;//1024
    Typography
    ========================================================================== */
 $sanchez:'Sanchez';
-$maven:'Maven Pro';
+$sspro:'Source Sans Pro';
 
 
 p {
-	font-size: 1.15em;
+	font-size: .9em;
 	
 	.entry-content & {
 		margin: 1.9em 0;
 	}
 	
 	#footer & {
-		color:#9B9B9B;
 		line-height: 1;
-		font-size: 1em;
+		font-size: .8em;
+		font-family: $sanchez;
+		color: #ababab;
 	}
 }
 
+li {
+	font-size: 1em;
+}
+
 p, li {
-	font-family: $maven;
+	font-family: $sspro, sans-serif;
 }
 
 .entry-content ul li, .entry-content ol li {
@@ -47,7 +52,7 @@ p, li {
 h2, h3, h4, h5, h6 {
 	text-rendering: optimizelegibility;
 	font-weight: normal;
-	font-family: $maven;
+	font-family: $sspro, sans-serif;
 }
 
 h5, h6 {
@@ -60,7 +65,7 @@ h1 {
 	font-weight: 300;
 	line-height: 130%;
 	font-family: $sanchez;
-	letter-spacing: .08em;
+	letter-spacing: .05em;
 	
 	&.entry-home {
 		position: absolute;
@@ -115,7 +120,7 @@ h3 {
 	color: #111111;
 	margin: 1.7em 0 2em;
 	letter-spacing: .05em;
-	font-size: 1em;
+	font-size: 1.2em;
 	font-weight: bold;
 
 }

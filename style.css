@@ -24,16 +24,20 @@
    Typography
    ========================================================================== */
 p {
-  font-size: 1.15em; }
+  font-size: .9em; }
   .entry-content p {
     margin: 1.9em 0; }
   #footer p {
-    color: #9B9B9B;
     line-height: 1;
-    font-size: 1em; }
+    font-size: .8em;
+    font-family: "Sanchez";
+    color: #ababab; }
+
+li {
+  font-size: 1em; }
 
 p, li {
-  font-family: "Maven Pro"; }
+  font-family: "Source Sans Pro", sans-serif; }
 
 .entry-content ul li, .entry-content ol li {
   font-size: 1.1em; }
@@ -41,7 +45,7 @@ p, li {
 h2, h3, h4, h5, h6 {
   text-rendering: optimizelegibility;
   font-weight: normal;
-  font-family: "Maven Pro"; }
+  font-family: "Source Sans Pro", sans-serif; }
 
 h5, h6 {
   font-weight: normal; }
@@ -52,7 +56,7 @@ h1 {
   font-weight: 300;
   line-height: 130%;
   font-family: "Sanchez";
-  letter-spacing: .08em; }
+  letter-spacing: .05em; }
   h1.entry-home {
     position: absolute;
     top: 30%;
@@ -93,7 +97,7 @@ h3 {
   color: #111111;
   margin: 1.7em 0 2em;
   letter-spacing: .05em;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold; }
 
 .entry-content h4 {
@@ -179,15 +183,16 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  background-color: #57cccc;
-  border: 0;
+  border: none;
+  border-bottom: 1px  solid #52bebc;
   border-radius: 2px;
-  color: #fff;
-  font-size: 12px;
+  color: #52bebc;
+  font-size: 1.2em;
   font-weight: 700;
   padding: 10px 30px 11px;
   text-transform: uppercase;
-  vertical-align: bottom; }
+  vertical-align: bottom;
+  background: transparent; }
 
 button:hover,
 button:focus,
@@ -207,6 +212,9 @@ input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active {
   background-color: #57cccc; }
+
+form p {
+  font-family: "Sanchez"; }
 
 /* Placeholder text color -- selectors need to be separate to work. */
 ::-webkit-input-placeholder {
@@ -342,19 +350,35 @@ span > object {
   margin-top: 30px; }
 
 /* ==========================================================================
+	Footer
+   ========================================================================== */
+footer {
+  background: #666;
+  padding: 1em 0;
+  float: left;
+  width: 100%; }
+
+.widget-footer {
+  text-align: center; }
+
+.widget-footer a {
+  color: #52bebc;
+  text-decoration: underline; }
+
+/* ==========================================================================
    Navigation & Links
    ========================================================================== */
 a {
   color: #fff;
   text-decoration: none;
-  font-family: "Maven Pro"; }
+  font-family: "Source Sans Pro"; }
   a:hover {
     color: #cccccc; }
   a.light:hover {
     color: white; }
 
 .button {
-  font-family: "Maven Pro";
+  font-family: "Source Sans Pro";
   text-transform: uppercase;
   letter-spacing: .1em;
   background: none !important;
@@ -610,6 +634,88 @@ a {
       border: 2px solid white;
       background-color: transparent; }
 
+@-webkit-keyframes fluidboxLoading {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotateX(0) rotateY(0); }
+  50% {
+    -webkit-transform: translate(-50%, -50%) rotateX(-180deg) rotateY(0); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotateX(-180deg) rotateY(-180deg); } }
+
+@keyframes fluidboxLoading {
+  0% {
+    transform: translate(-50%, -50%) rotateX(0) rotateY(0); }
+  50% {
+    transform: translate(-50%, -50%) rotateX(-180deg) rotateY(0); }
+  100% {
+    transform: translate(-50%, -50%) rotateX(-180deg) rotateY(-180deg); } }
+
+.fluidbox {
+  outline: none; }
+
+.fluidbox-overlay {
+  background-color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: zoom-out;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* Transition time for overlay is halved to ensure that flickering doesn't happen */
+  transition: all 0.125s ease-in-out 0.125s; }
+
+.fluidbox-wrap {
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
+  position: relative;
+  transition: all 0.25s ease-in-out;
+  /* To prevent flickering, we delay the showing of the image */ }
+  .fluidbox-closed .fluidbox-wrap img {
+    transition: opacity 0s ease-in-out 0.25s; }
+
+.fluidbox-ghost {
+  background-size: 100% 100%;
+  background-position: center center;
+  position: absolute;
+  -webkit-transition-property: opacity, -webkit-transform;
+  -moz-transition-property: opacity, -moz-transform;
+  -o-transition-property: opacity, -o-transform;
+  transition-property: opacity, transform;
+  transition-duration: 0s, 0.25s;
+  transition-delay: 0.25s, 0s; }
+  .fluidbox-opened .fluidbox-ghost {
+    transition-delay: 0s, 0s; }
+
+.fluidbox-loader {
+  perspective: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; }
+  .fluidbox-loader::before {
+    /* You can replace this with any color you want, or even a loading gif if desired */
+    background-color: rgba(255, 255, 255, 0.85);
+    content: '';
+    transform-style: preserve-3d;
+    transition: all 0.25s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    padding-bottom: 20%; }
+
+.fluidbox-loading .fluidbox-loader::before {
+  -webkit-animation: fluidboxLoading 1s 0s infinite ease-in-out forwards;
+  animation: fluidboxLoading 1s 0s infinite ease-in-out forwards;
+  opacity: 1; }
+
 /* ==========================================================================
    Pages Content 
    ========================================================================== */
@@ -632,7 +738,7 @@ a {
 #main {
   position: absolute;
   top: 0;
-  margin: 130px auto 0;
+  margin: 10em auto 0;
   max-width: 90%;
   left: 0;
   right: 0;
@@ -673,8 +779,12 @@ a {
   height: 100%;
   width: 100%; }
 
-#services {
-  padding: 4em 0 4em; }
+.block {
+  padding: 7em 0 7em; }
+
+.block h1 {
+  font-size: 1.4em;
+  text-transform: uppercase; }
 
 .column ul {
   margin: 0; }
@@ -689,7 +799,41 @@ a {
   margin-top: 2em; }
 
 .col-3 {
-  margin-top: 7em; }
+  margin-top: 8em; }
 
 .col-4 {
   margin-top: 3em; }
+
+#services {
+  background: #f7f7f1; }
+
+#contact {
+  background: #f1f4f0; }
+
+#projects .module {
+  padding: 6em 0 10em;
+  float: left;
+  width: 100%; }
+  #projects .module .text {
+    margin-left: 1em;
+    margin-bottom: 2em; }
+    #projects .module .text h1 {
+      margin-bottom: 0; }
+    #projects .module .text p {
+      margin-top: 0; }
+    #projects .module .text a {
+      color: #737373;
+      text-decoration: underline;
+      font-size: .8em;
+      letter-spacing: 0.08em; }
+
+#projects .row {
+  position: relative; }
+
+#projects .first-module .up {
+  bottom: -5em;
+  position: absolute; }
+
+#projects .third-module .up {
+  bottom: 2em;
+  position: absolute; }

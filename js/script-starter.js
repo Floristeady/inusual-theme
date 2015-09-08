@@ -21,9 +21,8 @@ jQuery(function ($) {
 	}
 	
 	function onLoadAndResize(){  
-	
+	    $('.project-image a').fluidbox();
 	}
-
 
 	/************************* 
 	Ejecución

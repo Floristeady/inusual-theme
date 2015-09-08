@@ -25,7 +25,7 @@
 #main {
 	position: absolute;
 	top:0;
-	margin: 130px auto 0;
+	margin: 10em auto 0;
 	max-width: 90%;
 	left: 0;
 	right: 0;
@@ -75,9 +75,14 @@
     width: 100%;
 }
 
-#services {
-	padding: 4em 0 4em;
+.block {
+	padding: 7em 0 7em;
 }
+
+.block h1 {
+	font-size: 1.4em;
+	text-transform: uppercase;
+} 
 
 .column {
 	ul {
@@ -99,9 +104,66 @@
 }
 
 .col-3 {
-		margin-top: 7em;
+		margin-top: 8em;
 }
 
 .col-4 {
 		margin-top: 3em;
+}
+
+#services {
+	background: #f7f7f1;
+}
+
+#contact {
+	background: #f1f4f0;
+}
+
+#projects {
+	
+	.module {
+		padding: 6em 0 10em;
+		float: left;
+		width: 100%;
+		
+		.text {
+			margin-left: 1em;
+			margin-bottom: 2em;
+			
+			h1 {
+				margin-bottom: 0;
+			}
+			
+			p {
+				margin-top: 0;
+			}
+			
+			a {
+				color: #737373;
+				text-decoration: underline;
+				font-size: .8em;
+				letter-spacing: 0.08em;
+			}
+		}
+	}
+	
+	.row {
+		position: relative;
+		
+	}
+	
+	.first-module {
+			.up  {
+				bottom: -5em;
+				position: absolute;
+			}
+		}
+		
+	.third-module {
+	    .up {
+		  bottom: 2em;
+		  position: absolute;
+		}
+	}
+	
 }
