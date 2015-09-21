@@ -208,7 +208,7 @@ function inusual_font_url() {
 	 * by Lato, translate this to 'off'. Do not translate into your own language.
 	 */
 	if ( 'off' !== _x( 'on', 'Font: on or off', 'inusual' ) ) {
-		$font_url = add_query_arg( 'family', urlencode( 'Sanchez:400italic,400|Source+Sans+Pro:400,700' ), "//fonts.googleapis.com/css" );
+		$font_url = add_query_arg( 'family', 'Sanchez:400italic,400|Source+Sans+Pro:400,700', "//fonts.googleapis.com/css" );
 	}
 	return $font_url;
 }
@@ -527,5 +527,18 @@ $args = array(
      flush_rewrite_rules();
 }
 
+/**
+********************* Admin remove *****************
+*/
+add_filter('show_admin_bar', '__return_false');
+
+/**
+********************* URl for folder Images *****************
+*/
+function set_js_var() {
+  $translation_array = array( 'template_directory_uri' => get_template_directory_uri());
+  wp_localize_script( 'jquery', 'my_data', $translation_array );
+}
+add_action('wp_enqueue_scripts','set_js_var');
 
 ?>

@@ -1,6 +1,7 @@
 //colors
 $cyan: #52bebc;
 $cyan-sat: saturate($cyan, 20%);
+$cyan-dark: darken($cyan, 30%);
 $yellow: #f0a537;
 $red: #ed574a;
 
@@ -11,6 +12,7 @@ $small-screen: 40.063em; //641
 $medium-screen: 48.00em; //768
 $large-screen: 58.75em; //940
 $xlarge-screen: 64em;//1024
+$xxlarge-screen: 68.750em;//1100
 
 
 
@@ -69,12 +71,18 @@ h1 {
 	
 	&.entry-home {
 		position: absolute;
-		top:30%;
+		top:20%;
 		padding: 0 10%;
 		width: 100%;
 		text-align: center;
 		color: #f2edd7;
+		font-size: 1em;
 		text-transform: uppercase;
+		
+		@media screen and (min-width: $medium-screen) {
+			top:30%;
+			font-size: 1.65em;
+		}
 	}
 }
 
@@ -99,8 +107,14 @@ h2 {
 	
 	&.side-right {
 		margin-top: 5%;
-		right: 5%;
-		text-align: right;
+		right: 0;
+		text-align: center;
+		left: 0;
+		
+		@media screen and (min-width: $medium-screen) {
+			right: 5%;
+			text-align: right;
+		}
 	}
 	
 	&.side-left {
@@ -136,7 +150,11 @@ h3 {
 }
 
 strong {
-	font-weight: 500;
+	font-weight: 700;
+}
+
+.cyan {
+	color: $cyan;
 }
 	
 

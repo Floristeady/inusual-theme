@@ -10,7 +10,6 @@ get_header(); ?>
 
 <div id="content" class="site-content">
 	
-	
     <div class="fullscreen-cover">
 	    <div class="cover"></div>
 	    <div id="container">
@@ -18,100 +17,61 @@ get_header(); ?>
 				<div class="column small-12 small-centered">
 					<div id="main">
 						<h2 class="subtext side-right">Proyectos en Colaboración</h2>
-						<h1 class="entry-home ">Queremos mejorar el paisaje digital, diseñando la identidad de tu marca y comunicando tu proyecto.</h1>
-						<img class="entry-img hide" src="<?php echo get_template_directory_uri(); ?>/images/imagotipo_claro.svg">
-						<a class="button button-intro" href="">+</a>
-						<h2 class="subtext side-left">Estudio Independiente</h2>
+						<div class="intro">
+							<img id="intro1" class="entry-home entry-img" src="<?php echo get_template_directory_uri(); ?>/images/imagotipo_claro.svg">
+
+							<h1 id="intro2" class="entry-home">Varios años de experiencia en el mundo digital. Ahora contamos con colaboradores que nos ayudan en otras áreas para hacer proyectos integrales. </h1>
+							<h1 id="intro3" class="entry-home">Queremos crear la identidad de tu marca y diseñar una experiencia única para tus clientes, pero primero identificar que necesitas comunicar.</h1>
+							<h1 id="intro4" class="entry-home">Tu proyecto es único para nosotros, la solución también. Nuestro proceso: Identificar + planificar + diseñar + desarrollar.</h1>
+						</div>
 						
-						<img class="img" src="<?php echo get_template_directory_uri(); ?>/images/assets/border.png">
+						<span class="show-for-small-only intro-button">
+						<a class="button button-intro" href="#">Saber más <span>+</span></a></span>
+						
+						<?php if(get_field('link_button')) { ?>
+						<span class="show-for-medium-up intro-button">
+							<a class="button button-intro" href="<?php the_field('link_button'); ?>"><?php the_field('text_button'); ?></a>
+						</span>
+						<?php } ?>
+
+						<h2 class="subtext side-left show-for-medium-up">Estudio Independiente</h2>
+						
+						<div class="cd-background-wrapper hide">
+							<figure class="cd-floating-background">
+								<img class="img" src="<?php echo get_template_directory_uri(); ?>/images/assets/border.png">
+							</figure>
+						</div>
 					</div>
-					
-					
-				
+	
 				</div>
 				
 			</div>
 	    </div>
     </div>
-    
-    
-    <div id="services" class="block">
-	    <div class="row">
-		    <div class="column medium-9 end">
-		    	<h2>SERVICIOS</h2>
-				<h1>ESPECIALIZADOS EN DISEÑO Y DESARROLLO WEB RESPONSIVE, PROYECTOS DIGITALES Y DISEÑO DE IDENTIDAD VISUAL.</h1>
-		    </div>
-	    </div>
-		<div class="row">
-		    <div class="column medium-offset-1 medium-3 col-1">
-			    <h3>Planificación y Diseño</h3>
-			    <ul class="list">
-				     <li>Arquitectura de Información</li>
-				     <li>Diseño de Interfaces</li>
-				     <li>Diseño Web Responsive</li>
-				     <li>Diseño de Interacción</li>
-				</ul>
-		    </div>
-		    
-		    <div class="column medium-offset-1 medium-3 col-4">
-			    <h3>Branding</h3>
-			    <ul class="list">
-				     <li>Naming</li>
-				     <li>Diseño Identidad Visual</li>
-				     <li>Guías de Estilo digitales</li>
-				     <li>Papelería corporativa</li>
-				</ul>
-		    </div>
-		    
-		     <div class="column medium-4 col-3">
-			    <h3>Desarrollo</h3>
-			    <ul class="list">
-				    <li>Programación front-end</li>
-				    <li>Gestor de Contenidos Dinámicos con Wordpress</li>
-				    <li>Programación responsive</li>
-				    <li>Sitios web estáticos con Jekyll</li>
-				</ul>
-		    </div>
-		    
-	    </div>
-	    
-	    
-    </div>
 
-    <div id="contact" class="block">
-	    <div class="row">
-		    
-		    <div class="column medium-9 end">
-	    
-	    		<h2>CONTÁCTANOS SI ESTÁS PLANIFICANDO UN PROYECTO</h2>
-				<h1>Equipo multidisciplinario, formado por colaboradores.</h1>
+
+	<?php // contenido págines destacados	
+		$args = array(
+			'post_type'	=> array('page'),
+			'posts_per_page' => 3,
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
+			'meta_query' => array(
+				array( 'key' => 'featured_content', 'value' => '1')
+			) );
 			
-		    </div>
-		    
-	    </div>
-	    
-	    <div class="row">
-		    
-			<div class="column medium-3">
+		$featured_page = new WP_Query( $args ); ?>
+
+	<?php if ( $featured_page->have_posts() ) { while ( $featured_page->have_posts() ) : $featured_page->the_post(); ?>		
+	<?php $theid = get_field('id_content'); ?>
+	
+	<div id="<?php echo $theid; ?>" class="block">
+		
+		<?php the_content(); ?>	 
 				
-				<p>CLIENTES:<br> Trabajamos ayudando a emprendedores, pequeñas y medianas empresas de México.</p>
-				
-				<p>AGENCIAS:<br> Nos gusta colaborar con agencias y creativos, en nuevos e interesantes proyectos.</p>
-				
-				<p>SOMOS:<br> Estudio creado por Florencia Rosenfeld (diseñadora digital/UI/directora de proyectos). El equipo se arma según el tipo de proyecto que realicemos, si te interesa formar parte del equipo, escríbenos.</p>
-			</div>
+	</div>
 
-		    
-			    <div class="column medium-8">
-				    	<?php echo do_shortcode( '[contact-form-7 id="25" title="Contacto"]' ); ?>
-				    
-			    </div>
-		    
-	    </div>
-    	
-    </div>
-
-
-
-
+    <?php endwhile; } ?> 
+	<?php wp_reset_query(); ?>
+        
 <?php get_footer(); ?>

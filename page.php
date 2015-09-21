@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<div id="content" class="site-content">
+<div id="content" class="site-content row block">
 	
 		<?php
 			// Start the Loop.

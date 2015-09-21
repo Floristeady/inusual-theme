@@ -14,7 +14,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--><html <?php language_attributes(); ?> ><!--<![endif]-->
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 		<title><?php wp_title( '|', true, 'right' ); ?></title>
 			
 	    <meta name="description" content="<?php echo '' . get_bloginfo ( 'description' );  ?>">
@@ -24,6 +24,7 @@
 		<!--[if lte IE 9]>
 		  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+
 <?php
 		/* pages with no-js for commmets */
 		if ( is_singular() && get_option( 'thread_comments' ) )
@@ -56,7 +57,7 @@
 				
 				<nav id="access" role="navigation" class="clearfix">
 					<a class="screen-reader-text skip-link" href="#content"><?php _e( 'Skip to content', 'inusual' ); ?></a>
-					<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
+					<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary','menu_class' => 'menu-main' ) ); ?>
 				</nav><!-- #access -->
 			</div>
 

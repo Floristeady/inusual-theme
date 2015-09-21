@@ -14,7 +14,15 @@
 	height: 100%;
 } 
 
-#container {
+.border {
+	padding: 0 0.9375em;
+	
+	@media screen and (min-width: $medium-screen) {
+    	padding: 0;
+	}
+}
+
+#container, .container {
 	width: 100%;
     height: 100%;
     position: absolute;
@@ -25,44 +33,110 @@
 #main {
 	position: absolute;
 	top:0;
-	margin: 10em auto 0;
+	margin: 8em auto 0;
 	max-width: 90%;
 	left: 0;
 	right: 0;
 	text-align: center;
 	
-	&::before {
-		content: '';
-		//background: url(images/assets/border.png) no-repeat;
-		width: 1024px;
-		height: 529px;
-		display: block;
+	@media screen and (min-width: $medium-screen) {
+		margin: 4em auto 0;
 	}
 	
-}
+	@media screen and (min-width: $medium-screen) and (orientation : portrait) {
+		margin: 12em auto 0;
+	}
+	
+	@media screen and (min-width: $xlarge-screen) and (orientation : landscape)  {
+		margin: 6em auto 0;
+	}
+	
+	@media screen and (min-width: $xxlarge-screen) {
+		margin: 8em auto 0;
+	}
 
-.img {
-	position: absolute;
-	top: 0;
-	max-width: 100%;
-	left: 0;
-	right: 0;
-	text-align: center;
-}
-
-.entry-img {
-	position: absolute;
-	top:20%;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
+	
+	&::before {
+		content: '';
+		display: block;
+		height: 250px;
+		
+		@media screen and (min-width: 400px) {
+			height: 300px;
+		}
+		
+		@media screen and (min-width: $medium-screen) {
+			width: 600px;
+			height: 400px;
+			
+		}
+		
+		@media screen and (min-width: $xlarge-screen) {
+			width: 800px;
+			height: 529px;
+			
+		}
+	}
+	
 }
 
 .fullscreen-cover {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: #555;
     position: relative;
+    
+    .cd-background-wrapper {
+		position: absolute;
+		top: 10%;
+		max-width: 100%;
+		left: 0;
+		right: 0;
+		text-align: center;
+		
+		&.project-image img {
+			opacity: 0;
+			transition: opacity .3s ease-in;
+		}
+		
+		@media screen and (min-width: $medium-screen) {
+			top:0%;
+		}
+	}
+
+}
+
+.intro .entry-home {
+	opacity: 0;
+}
+
+.intro .entry-img {
+	position: absolute;
+	top:20%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	opacity: 1;
+	max-width: 40%;
+	
+	@media screen and (orientation : landscape)  {
+		max-width: 20%;
+	}
+	
+	@media screen and (min-width: $xlarge-screen) {
+		max-width: inherit;
+	}
+}
+
+.intro-button {
+	
+	@media screen and (min-width: $small-screen) {
+		margin-top: 3em;
+	}
+	
+	@media screen and (min-width: $large-screen) {
+		margin-top: 0em;
+	}
 }
 
 .cover {
@@ -75,8 +149,28 @@
     width: 100%;
 }
 
+.cover-1 {
+	background-image: url(images/assets/cover01.jpg);
+}
+
+.cover-2 {
+	background-image: url(images/assets/cover02.jpg);
+}
+
 .block {
-	padding: 7em 0 7em;
+	padding: 3em 2% 3em;
+	
+	@media screen and (min-width: $small-screen) { 
+		.home & {
+			padding: 5em 2% 5em;
+		}
+		padding: 5em 2% 5em;
+	}
+	
+	@media screen and (min-width: $large-screen) { 
+		.home & { padding: 7em 0 7em;}
+		padding: 3em 0 7em;
+	}
 }
 
 .block h1 {
@@ -94,37 +188,109 @@
 	}
 }
 
-
-.col-1 {
-		margin-top: 8em;
-}
-
-.col-2 {
-		margin-top: 2em;
-}
-
-.col-3 {
-		margin-top: 8em;
-}
-
-.col-4 {
-		margin-top: 3em;
-}
-
-#services {
+#contact {
 	background: #f7f7f1;
 }
 
-#contact {
-	background: #f1f4f0;
+#contact .extra-info {
+	p {
+		margin-bottom: 2em;
+	}
 }
+
+#services .column, #contact .column {
+	text-align: center;
+	
+	@media screen and (min-width: $small-screen) { 
+		text-align: left;
+	}
+	
+}
+
+#services .icon {
+	position: absolute;
+}
+
+.i-content {
+	right: 1em;
+}
+
+.i-interface {
+	left: 2em;
+}
+
+.i-tablet {
+	left: 3em;
+}
+
+
+@media screen and (min-width: $small-screen) { 
+
+	.col-1 {
+			margin-top: 8em;
+	}
+	
+	.col-2 {
+			margin-top: 2em;
+	}
+	
+	.col-3 {
+			margin-top: 8em;
+	}
+	
+	.col-4 {
+			margin-top: 3em;
+	}
+
+	
+	.i-map {
+		left: -4em;
+		top:-60px;
+	}
+	
+	.i-content {
+		bottom: -90px;
+		right: 5em;
+	}
+	
+	.i-interface {
+		left: 6em;
+		bottom: -120px;
+	}
+	
+	.i-tablet {
+		left: 3em;
+		top:-90px;
+	}
+	
+	.i-code {
+		right:3em;
+		bottom: -100px;
+	}
+
+}
+
 
 #projects {
 	
+	margin-top: 6em;
+	
+	@media screen and (min-width: $medium-screen) { 
+		margin-top: 0;
+	}
+	
+	.project-image {
+		text-align: center;
+	}
+	
 	.module {
-		padding: 6em 0 10em;
+		padding: 2em 0 2em;
 		float: left;
 		width: 100%;
+		
+		@media screen and (min-width: $medium-screen) { 
+			padding: 6em 0 10em;
+		}
 		
 		.text {
 			margin-left: 1em;
@@ -132,6 +298,16 @@
 			
 			h1 {
 				margin-bottom: 0;
+				font-size: 1.8em;
+				text-transform: uppercase;
+				
+				&::after {
+					content: '_';
+					display: block;
+					height: 1px;
+					width: 100px;
+					color: #adadad;
+				}
 			}
 			
 			p {
@@ -139,10 +315,14 @@
 			}
 			
 			a {
-				color: #737373;
+				color: #adadad;
 				text-decoration: underline;
 				font-size: .8em;
 				letter-spacing: 0.08em;
+				
+				&:hover {
+					color: $cyan;
+				}
 			}
 		}
 	}
@@ -151,19 +331,76 @@
 		position: relative;
 		
 	}
-	
-	.first-module {
-			.up  {
-				bottom: -5em;
-				position: absolute;
-			}
+
+	@media screen and (min-width: $small-screen) { 
+		
+	    .negative-margin-10 {
+		  margin-top: -10em;
 		}
 		
-	.third-module {
-	    .up {
-		  bottom: 2em;
-		  position: absolute;
+		.negative-margin-5 {
+		  margin-top: -5em;
+		}
+		
+	}
+
+}
+
+.cd-background-wrapper {
+	position: absolute;
+	overflow: hidden;
+	width: 1700px;
+
+	.no-touch & {
+		perspective: 4000px;
+	}
+
+	&::before {
+		/* never visible - this is used in jQuery to check the device type */
+		content: 'web';
+		display: none;
+	}
+
+	.touch &::before {
+		/* never visible - this is used in jQuery to check the device type */
+		content: 'mobile';
+	}
+}
+
+.cd-floating-background {
+	position: relative;
+
+	img {
+		display: block;
+		//width: 100%;
+		backface-visibility: hidden;
+		/* fixes a Firefox bug - images not correctly rendered*/
+		background-color: rgba(#FFF, .01);
+	}
+
+	img:not(:first-child) {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.no-touch & {
+		top: 0;
+		left: 0;
+		transform-style: preserve-3d;
+		transform: translateZ(0);
+
+		&.is-absolute {
+			position: absolute;
+		}
+
+		img {
+			transform: translateZ(290px);
 		}
 	}
-	
+
+	.no-touch.no-preserve-3d & {
+		/* we target browsers that don't support preserve-3d and show just a standard image - no effect visible */
+		position: relative;
+	}
 }

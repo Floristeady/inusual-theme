@@ -3,12 +3,12 @@
    ========================================================================== */
    
    a {
-	   color:#fff;
+	   color:#adadad;
 	   text-decoration: none;
 	   font-family: $sspro;
 	   
 	   &:hover {
-		   color:darken(#fff, 20%);
+		   color:$cyan;
 	   }
 	   
 	   &.light:hover {
@@ -29,7 +29,7 @@
 	   border-bottom: 1px solid $cyan;
 	   
 	   @media screen and (min-width: $small-screen) { 
-		  font-size: 1.375em; 
+		  font-size: 1.1em; 
 	   }
 	   
 	   &:hover {
@@ -39,6 +39,8 @@
 	   &.button-intro {
 		   text-align: center;
 		   margin: 0 auto;
+		   position: relative;
+		   z-index: 2000;
 	   }
    }
    
@@ -66,27 +68,33 @@
 	   }
 	   
 	   a {
-		   color: rgba(162, 162, 162, 0.9);
-		   padding: 18px 10px;
+		   padding: 10px 10px;
 		   display: inline-block;
 		   line-height: 1;
 		   
 		   @media screen and (min-width: $small-screen) { 
-				
+				padding: 18px 10px;
 			}
 		   
 		   &:hover {
-			 	color: white; 
+			 	color: $cyan !important; 
 	    	}
-	   }
+	    	
+	     }
    }
    
 #access {
-    float: right;
-    @include menu-default;
+	@include menu-default;
+	
+	text-align: center;
+	margin: 0 auto;
+	
+	@media screen and (min-width: $small-screen) { 
+    	float: right;
+    }
+
 
     li {
-	    display: none;
 	    
 	    &.current-menu-item {
 		    display: inline-block;
@@ -94,14 +102,30 @@
 	    }
 	    
 	    &.current-menu-item a {
-	   		 font-weight: 500;
-	   		 color: white;
-	   		 padding-left: 0;
-	   		 
-	   		 @media screen and (min-width: $small-screen) { 
-		   		 padding-left: .8em;
-	   		 }
+   		 	font-weight: 500;
+   		 
+   		 	@media screen and (min-width: $small-screen) { 
+	   		 	padding-left: .8em;
+   		 	}
+
     	}
+    	
+    	.post-type-archive-project &.current-menu-item a, header.minimized &.current-menu-item a {
+			color: $cyan; 
+		}
+    	
+    	a {
+	    	
+	    	color: rgba(100, 100, 100, 0.9);
+
+		    header.minimized & {
+				color: rgba(100, 100, 100, 0.9);
+	    	}
+	    	
+	    	.home & {
+			    color: rgba(240, 240, 240, 0.9);
+		    }
+	    }
 
     }
 	
