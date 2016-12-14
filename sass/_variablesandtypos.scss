@@ -68,22 +68,6 @@ h1 {
 	line-height: 130%;
 	font-family: $sanchez;
 	letter-spacing: .05em;
-	
-	&.entry-home {
-		position: absolute;
-		top:20%;
-		padding: 0 10%;
-		width: 100%;
-		text-align: center;
-		color: #f2edd7;
-		font-size: 1em;
-		text-transform: uppercase;
-		
-		@media screen and (min-width: $medium-screen) {
-			top:30%;
-			font-size: 1.65em;
-		}
-	}
 }
 
 

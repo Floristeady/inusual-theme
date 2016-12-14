@@ -1,19 +1,19 @@
 jQuery(function ($) {
 	
 	/************************* 
-	Variables (tamaños editables)
+	Variables (tamaÃ±os editables)
 	**************************/
 	
 	var browserwidth;
-	var largewidth = 1024; // resolución mínima desktop
-	var mediumwidth = 767; // resolución mmedia
-	var smallwidth = 641; // resolución chica
+	var largewidth = 1024; // resoluciÃ³n mÃ­nima desktop
+	var mediumwidth = 767; // resoluciÃ³n mmedia
+	var smallwidth = 641; // resoluciÃ³n chica
 	
 	var mywindow = $(window);
 	var htmlbody = $('html,body');
 	
 	/************************* 
-	Ejecución
+	EjecuciÃ³n
 	**************************/
 
 	// Obtiene anchura del browser 	
@@ -96,7 +96,7 @@ jQuery(function ($) {
 
 	}
 	
-	// link menú home
+	// link menÃº home
 	function menuHome() { 
 		
 		//si es el home		
@@ -127,7 +127,17 @@ jQuery(function ($) {
   			  
 	}
 	
-	// link menú páginas
+	function randomText() {
+		var quotes = new Array(
+		"En Inusual Estudio tenemos experiencia en el diseÃ±o de sitios web corporativos e identidad de marca. Ahora trabajamos desde Puebla, MÃ©xico.", 
+		"Queremos crear la identidad de tu marca y diseÃ±ar una experiencia Ãºnica para tus clientes, pero primero identificar que necesitas comunicar.", 
+		"Tu proyecto es Ãºnico para nosotros, la soluciÃ³n tambiÃ©n. Nuestro proceso: Identificar + planificar + diseÃ±ar + desarrollar."),
+		randno = quotes[Math.floor( Math.random() * quotes.length )];
+		$('.quote').text( randno );
+	}
+	
+	
+	// link menÃº pÃ¡ginas
 	function menuPages() {
 		//Menu pages 
 		var _href = $('.menu-main > li.this > a');
@@ -273,7 +283,7 @@ jQuery(function ($) {
 
 
 	/************************* 
-	Ejecución
+	EjecuciÃ³n
 	**************************/
 
 	$(window).load(function() {
@@ -282,6 +292,7 @@ jQuery(function ($) {
 	   effectLoad();
 	   generateIntro();
 	   randomBackground();
+	   randomText();
 	   
 	   if ($('body').hasClass('home')) {
 	   	   if (browserwidth >= mediumwidth) {	
@@ -478,11 +489,12 @@ function generateIntro() {
     
     all = generateAll();
     randomed = generateRandomed(all);
+    randomed = doNext(all, randomed);
     
-    $("#main").on("click", function (evt) {
+   /* $("#main").on("click", function (evt) {
         evt.preventDefault();
         randomed = doNext(all, randomed);
-    });
+    });*/
 }
 
 function generateAll() {
@@ -502,11 +514,10 @@ function generateRandomed(all) {
 }
 
 function doNext(all, randomed) {
-    $(".entry-home").transition({ opacity: 0});
-   
+    //$(".entry-home").transition({ opacity: 0});
     
     if (randomed.length < 1) {
-        $("#intro4").transition({ opacity: 1});
+        //$("#intro4").transition({ opacity: 1});
         randomed = generateRandomed(all);
     } else {
         var next = randomed.shift();

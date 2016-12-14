@@ -16,13 +16,14 @@ get_header(); ?>
 			<div class="row">
 				<div class="column small-12 small-centered">
 					<div id="main">
-						<h2 class="subtext side-right">Proyectos en Colaboración</h2>
+						<h2 class="subtext side-right">Sitio Web Corporativos / Diseño Identidad Visual</h2>
 						<div class="intro">
-							<img id="intro1" class="entry-home entry-img" src="<?php echo get_template_directory_uri(); ?>/images/imagotipo_claro.svg">
-
-							<h1 id="intro2" class="entry-home">Varios años de experiencia en el mundo digital. Ahora contamos con colaboradores que nos ayudan en otras áreas para hacer proyectos integrales. </h1>
-							<h1 id="intro3" class="entry-home">Queremos crear la identidad de tu marca y diseñar una experiencia única para tus clientes, pero primero identificar que necesitas comunicar.</h1>
-							<h1 id="intro4" class="entry-home">Tu proyecto es único para nosotros, la solución también. Nuestro proceso: Identificar + planificar + diseñar + desarrollar.</h1>
+							<img id="intro1" role="img" class="entry-home entry-img" src="<?php echo get_template_directory_uri(); ?>/images/imagotipo_claro.svg">
+							
+							<div role="contentinfo" id="intro2" class="entry-home entry-text">
+								<img id="intro1" width="80" src="<?php echo get_template_directory_uri(); ?>/images/imagotipo_claro.svg">
+								<h1  class="quote">En Inusual Estudio tenemos experiencia en el diseño de sitios web corporativos e identidad de marca. Ahora trabajamos desde Puebla, México.</h1>
+							</div>
 						</div>
 						
 						<span class="show-for-small-only intro-button">

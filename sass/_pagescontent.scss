@@ -106,18 +106,38 @@
 
 }
 
-.intro .entry-home {
-	opacity: 0;
+.entry-home {	
+		opacity: 0;
+		position: absolute;
+		top:25%;
+		padding: 0 10%;
+		width: 90%;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+	
+	h1 {
+		text-align: center;
+		color: #f2edd7;
+		font-size: 1em;
+		text-transform: uppercase;
+		
+		@media screen and (min-width: $medium-screen) {
+			top:30%;
+			font-size: 1.65em;
+		}
+	
+	}
 }
 
-.intro .entry-img {
+.entry-img {
 	position: absolute;
-	top:20%;
+	top:30%;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
-	opacity: 1;
 	max-width: 40%;
+	width: auto;
 	
 	@media screen and (orientation : landscape)  {
 		max-width: 20%;
